@@ -5,6 +5,11 @@
     --line: rgba(0,0,0,0.06);
     --font-main: 'Inter', sans-serif;
     --font-serif: 'Playfair Display', serif;
+    /* 新增字体大小变量 */
+    --h1-size: 2.8rem;
+    --h2-size: 2.2rem;
+    --h3-size: 1.8rem;
+    --section-title-size: 0.9rem;
 }
 
 /* 全局重置，修复遮挡的关键 */
@@ -30,9 +35,14 @@ body {
 
 /* 装饰背景线 */
 .line-background {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%;
     background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
-    background-size: 120px 120px; z-index: -1;
+    background-size: 120px 120px; 
+    z-index: -1;
 }
 
 /* 容器布局 */
@@ -41,43 +51,102 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     position: relative;
+    min-height: 100vh;
 }
 
 /* --- 侧边栏 --- */
 .sidebar {
     width: 280px;
     flex-shrink: 0;
-    height: 100vh;
-    position: sticky; 
+    position: fixed; /* 改为固定定位 */
     top: 0;
+    left: calc(50% - 600px); /* 居中计算：1200px宽度的一半减去侧边栏的左侧偏移 */
+    height: 100vh;
     padding: 80px 40px 40px 0;
     border-right: 1px solid var(--line);
+    z-index: 10;
+    background: var(--bg);
+    /* 添加滚动条支持 */
+    overflow-y: auto;
+    /* 隐藏滚动条但保持功能 */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/Edge */
+}
+.sidebar::-webkit-scrollbar {
+    display: none; /* Chrome/Safari/Opera */
 }
 
 .avatar-frame {
-    width: 100px; height: 120px;
+    width: 100px; 
+    height: 120px;
     background: #f8f8f8;
     margin-bottom: 40px;
     border-radius: 2px;
     overflow: hidden;
 }
-.prof-pic { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); transition: 0.5s; }
-.prof-pic:hover { filter: grayscale(0); }
+.prof-pic { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    filter: grayscale(1); 
+    transition: 0.5s; 
+}
+.prof-pic:hover { 
+    filter: grayscale(0); 
+}
 
-.identity { margin-bottom: 50px; }
-.name { font-size: 1.4rem; font-weight: 600; letter-spacing: -0.04em; margin-bottom: 6px; }
-.title { font-size: 0.85rem; color: #999; }
-.uni { font-size: 0.8rem; font-weight: 600; }
+.identity { 
+    margin-bottom: 50px; 
+}
+.name { 
+    font-size: 1.4rem; 
+    font-weight: 600; 
+    letter-spacing: -0.04em; 
+    margin-bottom: 6px; 
+}
+.title { 
+    font-size: 0.85rem; 
+    color: #999; 
+}
+.uni { 
+    font-size: 0.8rem; 
+    font-weight: 600; 
+}
 
-.nav-links { display: flex; flex-direction: column; gap: 14px; margin-bottom: 60px; }
-.nav-links a { text-decoration: none; color: #888; font-size: 0.8rem; letter-spacing: 0.05em; transition: 0.3s; }
-.nav-links a:hover { color: var(--text); transform: translateX(5px); }
+.nav-links { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 14px; 
+    margin-bottom: 60px; 
+}
+.nav-links a { 
+    text-decoration: none; 
+    color: #888; 
+    font-size: 0.8rem; 
+    letter-spacing: 0.05em; 
+    transition: 0.3s; 
+}
+.nav-links a:hover { 
+    color: var(--text); 
+    transform: translateX(5px); 
+}
 
-.traffic-pod { margin-top: auto; }
-.label-nano { font-size: 10px; color: #ccc; letter-spacing: 0.1em; display: block; margin-bottom: 12px; }
+.traffic-pod { 
+    margin-top: auto; 
+}
+.label-nano { 
+    font-size: 10px; 
+    color: #ccc; 
+    letter-spacing: 0.1em; 
+    display: block; 
+    margin-bottom: 12px; 
+}
 .globe-shell { 
-    width: 80px; height: 80px; opacity: 0.5; 
-    filter: grayscale(1); border-radius: 50%;
+    width: 80px; 
+    height: 80px; 
+    opacity: 0.5; 
+    filter: grayscale(1); 
+    border-radius: 50%;
 }
 
 /* --- 内容区 --- */
@@ -85,18 +154,29 @@ body {
     flex: 1;
     min-width: 0;
     padding: 80px 0 80px 60px;
+    margin-left: 280px; /* 为固定侧边栏留出空间 */
 }
 
 .content-block { 
-    margin-bottom: 100px; 
+    margin-bottom: 120px; /* 增加间距 */
     max-width: 100%;
+    /* 添加内边距防止内容贴边 */
+    padding-right: 20px;
 }
 
-.block-num { font-family: var(--font-serif); font-style: italic; color: #ddd; font-size: 1.1rem; margin-bottom: 15px; }
+.block-num { 
+    font-family: var(--font-serif); 
+    font-style: italic; 
+    color: #bbb; /* 改为深灰色更显眼 */
+    font-size: 1.4rem; 
+    margin-bottom: 15px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
 
 .hero-quote {
     font-family: var(--font-serif);
-    font-size: 2.5rem;
+    font-size: var(--h1-size); /* 使用变量 */
     font-weight: 600;
     line-height: 1.15;
     margin-bottom: 30px;
@@ -116,15 +196,26 @@ body {
     max-width: 600px;
 }
 .narrative p {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+/* 新增：添加引言样式 */
+.intro-quote {
+    font-style: italic;
+    color: #666;
+    border-left: 3px solid var(--accent);
+    padding-left: 20px;
+    margin: 25px 0;
+    font-size: 1.05rem;
 }
 
 .section-title { 
-    font-size: 0.75rem; 
+    font-size: var(--section-title-size); 
     text-transform: uppercase; 
     letter-spacing: 0.2em; 
-    color: #bbb; 
+    color: #777; /* 加深颜色 */
     margin-bottom: 40px;
+    font-weight: 600;
 }
 
 /* 论文表格 */
@@ -149,16 +240,32 @@ body {
     flex-shrink: 0; 
     margin-top: 2px;
 }
-.pub-text { flex: 1; min-width: 0; }
-.pub-text h4 { 
-    font-size: 1.1rem; 
-    margin-bottom: 6px; 
-    line-height: 1.3;
-    color: #333;
+.pub-text { 
+    flex: 1; 
+    min-width: 0; 
 }
-.authors { font-size: 0.9rem; color: #777; margin-bottom: 4px; }
-.venue { font-size: 0.9rem; font-style: italic; color: #333; margin-bottom: 8px; }
-.pub-action { margin-top: 12px; font-size: 0.75rem; }
+.pub-text h4 { 
+    font-size: 1.3rem; /* 增大字号 */
+    margin-bottom: 8px; 
+    line-height: 1.3;
+    color: #222; /* 加深颜色 */
+    font-weight: 600;
+}
+.authors { 
+    font-size: 0.9rem; 
+    color: #777; 
+    margin-bottom: 4px; 
+}
+.venue { 
+    font-size: 0.9rem; 
+    font-style: italic; 
+    color: #333; 
+    margin-bottom: 8px; 
+}
+.pub-action { 
+    margin-top: 12px; 
+    font-size: 0.75rem; 
+}
 .pub-action a { 
     text-decoration: none; 
     color: #666; 
@@ -203,9 +310,10 @@ body {
 }
 
 .research-card h4 {
-    font-size: 1.1rem;
-    margin-bottom: 10px;
-    color: #333;
+    font-size: 1.3rem; /* 增大字号 */
+    margin-bottom: 12px;
+    color: #222; /* 加深颜色 */
+    font-weight: 600;
 }
 
 .research-card p {
@@ -365,17 +473,67 @@ body {
 
 /* 响应式调整 */
 @media (max-width: 850px) {
-    .site-wrapper { flex-direction: column; padding: 0 24px; }
-    .sidebar { width: 100%; height: auto; position: static; padding: 40px 0; border-right: none; border-bottom: 1px solid var(--line); }
-    .main-content { padding: 40px 0; }
-    .hero-quote { font-size: 2rem; }
-    .pub-row { flex-direction: column; gap: 10px; }
-    .research-grid { grid-template-columns: 1fr; gap: 20px; }
-    .footer { flex-direction: column; gap: 10px; align-items: flex-start; }
+    :root {
+        --h1-size: 2.2rem;
+        --h2-size: 1.8rem;
+        --h3-size: 1.5rem;
+    }
+    
+    .site-wrapper { 
+        flex-direction: column; 
+        padding: 0 24px; 
+    }
+    .sidebar { 
+        position: static; /* 移动端恢复普通定位 */
+        width: 100%; 
+        height: auto; 
+        padding: 40px 0; 
+        border-right: none; 
+        border-bottom: 1px solid var(--line);
+        overflow-y: visible;
+        left: 0;
+    }
+    .main-content { 
+        padding: 40px 0; 
+        margin-left: 0; /* 移动端取消左边距 */
+    }
+    .hero-quote { 
+        font-size: var(--h1-size); 
+    }
+    .pub-row { 
+        flex-direction: column; 
+        gap: 10px; 
+    }
+    .research-grid { 
+        grid-template-columns: 1fr; 
+        gap: 20px; 
+    }
+    .footer { 
+        flex-direction: column; 
+        gap: 10px; 
+        align-items: flex-start; 
+    }
+    .content-block {
+        margin-bottom: 80px;
+    }
 }
 
 @media (max-width: 600px) {
-    .contact-matrix { grid-template-columns: 1fr; }
-    .hero-quote { font-size: 1.6rem; }
-    .copy-link::after { display: none; }
+    :root {
+        --h1-size: 1.8rem;
+        --h2-size: 1.5rem;
+    }
+    
+    .contact-matrix { 
+        grid-template-columns: 1fr; 
+    }
+    .hero-quote { 
+        font-size: var(--h1-size); 
+    }
+    .copy-link::after { 
+        display: none; 
+    }
+    .block-num {
+        font-size: 1.2rem;
+    }
 }
